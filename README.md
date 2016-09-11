@@ -14,7 +14,7 @@ Experiment to see if I can control [Blend4Web](http://www.blend4web.org/)'s outp
 
 Blend4Web can output to a fairly performant JS, and it turns out that it's easily manipulated via the library's various function calls alone.  This makes it an interesting candidate to be controlled from Clojurescript.  Probably no partials are needed either, unlike more OO-based 3d JS frameworks.
 
-It also turns out that Blend4Web, like Clojurescript, uses [Google Closure](https://developers.google.com/closure/), and already has a bunch of externs declared for the compilation process.  This means I might be able to use those same externs for Clojurescript compilation.  That said, because the externs are made for a different compilation process,  retrofitting b4w's externs may not make any sense.  I may just have to define a bunch of functions and namespace them into the final html file.  But that's a lot more work.  I'll try the (seemingly) easy way first.
+It also turns out that Blend4Web, like Clojurescript, uses [Google Closure](https://developers.google.com/closure/), and already has a bunch of externs declared for the compilation process.  This means I might be able to use those same externs for Clojurescript compilation.  That said, because the externs are made for a different compilation process,  retrofitting b4w's externs may not make any sense.  I may end up wrapping the original code manually and namespace it into the final html file.  But that's a lot more work.  I'll try the (seemingly) easy way first.
 
 ### Why bother?  There's already plenty of 3d frameworks out there.
 
