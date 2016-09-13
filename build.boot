@@ -1,4 +1,4 @@
-(def +lib-version+ "0.0.1")
+(def +lib-version+ "0.0.2")
 (def +version+ (str +lib-version+ "-0"))
 
 (set-env!
@@ -18,8 +18,10 @@
 
 (deftask package []
   (comp
-   (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/src/b4w.js")
-   (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/deploy/apps/website/b4w.min.js")
+   (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/src/b4w.js"
+              :checksum "e630f3cd36c4c0148cdfd11f16e05b08")
+   (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/deploy/apps/website/b4w.min.js"
+              :checksum "571680aacdec6a8673c94eae595c1a6d")
    (sift      :move     {#"^b4w.js"
                          "cljsjs/blend4web/development/b4w.inc.js"
                          #"^b4w.min.js"
