@@ -63,7 +63,7 @@ After this, you'd be able to control the scene by calling b4w's usual module fun
 
 Blend4Web can output to a fairly performant WebGL-based scene, and its easily manipulated via the library's various own function calls. This means a more functional language like [Clojurescript](http://www.clojurescript.org/) could easily translate into b4w function calls.
 
-It also turns out that Blend4Web, like Clojurescript, uses [Google Closure](https://developers.google.com/closure/), and already has its own extern files.  Surprisingly, b4w's externs appear to be enough for generating a [cljsjs](http://cljsjs.github.io/) package.  Then again, that package can only seem to [*initialize* a b4w scene via Clojurescript](https://github.com/mikebelanger/blend4web_test). I can't actually trigger it's rendering yet.
+It also turns out that Blend4Web, like Clojurescript, uses [Google Closure](https://developers.google.com/closure/), and already has its own extern files.  Surprisingly, b4w's externs appear to be enough for generating a functioning [cljsjs](http://cljsjs.github.io/) package.
 
 
 ### Why bother?  There's already xyz.
