@@ -18,32 +18,46 @@ You'd make a scene in [Blender](http://www.blender.org/) the usual way, use Blen
   (:require blend4web))
 
 (defn ^:export start
-  []
-  (let [m-main  (.require js/b4w "main")
-        m-data  (.require js/b4w "data")
-        canvas  (.getElementById js/document "container")]
+  [json]
+  (let [m-main    (.require js/b4w "main")
+        m-data    (.require js/b4w "data")
+        m-scene   (.require js/b4w "scenes")
+        m-config  (.require js/b4w "config")
+        a-trans   (.require js/b4w "transform")
+        m-camera  (.require js/b4w "camera")
+        canvas    (.getElementById js/document "container")]
 
-    (.init m-main canvas)
-    (.load m-data "cube_test.json")))
+    (defn loaded-cb [data-id success]
+      (.log js/console "Main scene loaded on thread number " data-id
+      "with a success value of " success))
+
+    (defn stageload-cb [data-id success]
+      "Use camera, translation and probably other b4w modules within this
+      function's scope."
+      (when (.is-primary-loaded m-data)
+                (let [current-camera (.get-active-camera m-scene)
+                      cube           (.get-object-by-name m-scene "Cube")]
+
+                      (.translate-view m-camera current-camera 1 1 -10))))
+
+    (.set m-config "console_verbose" true)
+    (.load m-data (str json) loaded-cb stageload-cb true false)
+    (.init m-main canvas)))
 ```
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Basic Blend4Web->Clojurescript</title>
   <script src="main.js"></script>
 </head>
-<body>
-  <canvas id="container"></canvas>
-  <script>
-    window.onload = cube_test.core.start();
-  </script>
+<body onload="cube_test.core.start('cube_test.json');"</script>
+  <canvas id="container" width="500" height="500"></canvas>
 </body>
 </html>
 ```
 
-After this, you'd be able to control the scene by invoking b4w's usual function calls.
+After this, you'd be able to control the scene by calling b4w's usual module functions.
 
 ### ...Why?
 
