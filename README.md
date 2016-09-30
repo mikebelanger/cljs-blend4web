@@ -2,9 +2,11 @@
 
 [](dependency)
 ```clojure
-[cljsjs/blend4web "0.0.2-0"] ;; latest release
+[cljsjs/blend4web "16.09-0"] ;; latest release
 ```
 [](/dependency)
+
+Note the version number will now reflect the blend4web version its compatible with.
 
 ### Clojurescript -> Blend4Web Web-player functions
 
