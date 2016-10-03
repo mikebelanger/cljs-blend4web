@@ -1,5 +1,5 @@
 (def +lib-version+ "16.09")
-(def +version+ (str +lib-version+ "-0"))
+(def +version+ (str +lib-version+ "-1"))
 
 (set-env!
   :resource-paths #{"resources"}
@@ -66,7 +66,12 @@
                          "cljsjs/blend4web/common/uranium.js"
                          #"^uranium.js.mem"
                          "cljsjs/blend4web/common/uranium.js.mem"})
-   (sift      :include  #{#"^cljsjs"})
+
+   ;;uranium.js and uranium.js.mem need to both be in the same subdir as b4w's target html.
+   (sift :to-resource #{#"^cljsjs/blend4web/common/uranium.js"
+                        #"^cljsjs/blend4web/common/uranium.js.mem"})
+
+   (sift      :include   #{#"^cljsjs"})
    (deps-cljs :name     "blend4web")
    (show)
    (pom)
