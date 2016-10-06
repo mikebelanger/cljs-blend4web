@@ -1,4 +1,4 @@
-# cljsjs/blend4web
+# cljs-Blend4Web
 
 [](dependency)
 ```clojure
@@ -6,142 +6,47 @@
 ```
 [](/dependency)
 
-Note the version number will now reflect the blend4web version its compatible with.
+*Note the version number will now reflect the blend4web version its compatible with.  Also note: is a an alpha-quality software, and is probably going to break/change.*
 
 ### Clojurescript -> Blend4Web Web-player functions
 
-Experiment to see if I can control [Blend4Web](http://www.blend4web.org/)'s outputted JS stuff with Clojurescript.
+Controlling [Blend4Web](http://www.blend4web.org/)'s outputted WebGL with Clojurescript.  For an overview, check out the [proposed workflow](https://github.com/mikebelanger/blend4web/wiki/Clojurescript--Blend4Web).
 
-### Proposed workflow
+[Here it is in action](https://mikebelanger.github.io/blend4web_test/target/)
 
-You'd make a scene in [Blender](http://www.blender.org/) the usual way, use Blend4Web's exporter (JSON option) to make the un-manipulated 3d scene.  You would then load a scene with the exported files, only with Clojurescript instead of JS.  Here's what it would look like:
-```clojure
-(ns cube-test.core
-  (:require blend4web))
+*Note: Probably runs best on Chrome*
 
-(defn check-version []
-    (let [m-version (.require js/b4w "version")]
-      (.log js/console "Using Blend4Web Version" (.version m-version))))
+### Developing
 
-(check-version)
+###### 1: Downloading/Installing
+* [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 7/8 (8 recommended)
+* Latest version of [Clojure](http://www.clojure.org/)
+* The [boot](http://www.boot-clj.com/) project building tool.
+* [Git](http://www.git-scm.org/)
 
-(defn ^:export start
-  [json]
-  (let [m-main      (.require js/b4w "main")
-        m-data      (.require js/b4w "data")
-        m-scene     (.require js/b4w "scenes")
-        m-config    (.require js/b4w "config")
-        m-trans     (.require js/b4w "transform")
-        m-controls  (.require js/b4w "controls")
-        canvas      (.getElementById js/document "container")
-        position    (atom {:current 0
-                           :direction 1
-                           :back-limit 30
-                           :front-limit -30})
-        cube-range  (range -30 30)]
+If you'd like to develop the 3d content as well, download the [latest version of Blender](http://www.blender.org/download) and the [blend4web-addon](https://www.blend4web.com/pub/blend4web_addon_16_09_2.zip)
 
-    (defn loaded-cb [data-id success]
-      (.log js/console
-            "Main scene loaded on thread number: " data-id
-            "with a success value of: " success))
+This next step varies from OS to OS
 
-    ;;You can think this manifold-cb as an update per tick loop.  At least when
-    ;;the manifold type is an elapsed one. Note that the obj parameter returns
-    ;;the time between the last update and the current - in seconds.
-    (defn manifold-cb [obj manifold-id]
-      "Make any per-tick changes here."
-      (let [cube           (.get-object-by-name m-scene "Cube")
-            sensor-data    (first obj)]
+###### 2: Building JAR (Linux/OS X Users)
 
-            (.rotate-z-local m-trans cube sensor-data)))
-
-    (defn stageload-cb [data-id success]
-      "Use camera, translation and other b4w modules if you want to do something
-      static (ie the whole time its running). If you want something to change
-      over time, invoke the module functions within sensor manifold's callback
-      scope instead.  In this case, that callback function would be manifold-cb"
-      (when (.is-primary-loaded m-data)
-                (let [elapsed-sensor (.create-elapsed-sensor m-controls)]
-                  ;;The manifold sensor can act as an update-tick.
-                      (.create-sensor-manifold m-controls
-                                               nil
-                                               "m_main"
-                                               (.-CT_CONTINUOUS m-controls)
-                                               (clj->js [elapsed-sensor])
-                                                manifold-cb)
-
-                  (.log js/console "stage-load callback finished"))))
-
-    (.set m-config "console_verbose" true)
-    (.load m-data (str json) loaded-cb stageload-cb true false)
-
-    (.init m-main canvas)))
-```
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="main.js"></script>
-</head>
-<body onload="cube_test.core.start('cube_test.json');"</script>
-  <canvas id="container" width="500" height="500"></canvas>
-</body>
-</html>
-```
-
-Yeah it's a little verbose.  Once I get a grip on this, I'm hoping to wrap some of this stuff in different functions.
-
-After this, you'd be able to control the scene by calling b4w's usual module functions.
-
-### ...Why?
-
-Blend4Web can output to a fairly performant WebGL-based scene, and its easily manipulated via the library's various own function calls. This means a more functional language like [Clojurescript](http://www.clojurescript.org/) could easily translate into b4w function calls.
-
-It also turns out that Blend4Web, like Clojurescript, uses [Google Closure](https://developers.google.com/closure/), and already has its own extern files.  Surprisingly, b4w's externs appear to be enough for generating a functioning [cljsjs](http://cljsjs.github.io/) package.
-
-
-### Why bother?  There's already xyz.
-
-My main goal is getting 3d graphics into a beat-driven (aka audio-reactive) context.  While there's already some takes on this idea, I believe this setup will be the most optimal.
-
-- I've been using Blender for 10 years, and, despite it's eccentricities, is the devil I know.
-- I'm somewhat comfortable debugging JS, the language of blend4web's outputted webgl.
-- While I've only been using Clojurescript for about 4 months, it's lispyness make it conducive to live-coding, as evidenced by tools like [Overtone](http://overtone.github.io/), [Afterglow](https://github.com/brunchboy/afterglow) and [Quil](http://www.quil.info/).  The language itself is also very expressive, and coerces me into better coding practices.
-
-There's other software for this, but they'd force me to either learn a new 3d package, deal with 3d file format export issues, wrestle with JS, or all of the above.  I could just set the bar lower, and make triangles and circles, but that's just boring!
-
-### What about outputting Clojurescript-driven stuff back into Blender?
-
-It would be really cool if the live-coded scene be translated back into a Blender scene. Unfortunately, I can't figure this out, and I'm planning on Blender just outputting stuff.  If you have any ideas, please let me know!
-
-### I've just skimmed through to download this and play.
-
-I don't blame you, eager and hypothetical internetian.  Also, I'm glad you're interested.  Presuming you understand a bit about clojurescript, blend4web and JS, you're probably off to a good start.  If not, I have to warn you: this is unstable, and subject to change.  I can barely get this thing to work, so please be sure that you're comfortable with Clojurescript, boot-clj, JS, and even some blend4web.
-
-Assuming you already have Java 7 or 8 running, Clojure, [boot-clj](http://www.boot-clj.com/), your best bet is to clone the package repo into your local maven repo.  On OS X/Linux, that's a command-lining of:
-
+First download this repo, and get into a terminal emulator (ie Terminal.app, iTerm) and enter:
 ```bash
-cd ~/.m2/cljsjs
-git clone https://github.com/mikebelanger/blend4web.git
+git clone https://github.com/mikebelanger/clojure-blend4web.git
+cd clojure-blend4web
+
 ```
-**Note that if it complains the cljsjs directory doesn't exist, just make an empty one.  It the package likes to live right there.
-
-You then want to clone the [test repo](https://github.com/mikebelanger/blend4web_test), or...
-
-```bash
-cd ~/Downloads
-git clone https://github.com/mikebelanger/blend4web_test.git
-cd ~/Downloads/blend4web_test
-boot build
+Now compile this repo into a .jar, which sits in your ~/.m2 (maven repository).  This also downloads a bunch of code, so it may take some time.
+```
+boot package install
 ```
 
-Wait a bit while it builds everything, it'll finish when it tells you the elapsed time to build.  Then....
+###### 2: Building JAR (Windows Users)
+Not sure :P  I'm sure there's a way, but I don't have access to a Windows machine atm.  If you could tell me how to build the above .jar on Windows, please let me know, I'll put it on here.
 
-```bash
-open ~/Downloads/blend4web_test/target/index.html
-```
 
-You should see your browser load the compiled HTML.  For now, nothing renders, but open up the console and see if you can figure it out!  I can't, and there's not that many blend4web users, so I could use a few pointers.
+###### 3: Next Steps
 
-Windows users: If you know how to get this running on your systems, please let me know, and I'll add them here.
+So far just a basic tutorial, I promise I'll add more as this project starts to stabilize.
+
+[Starting a project from scratch](https://github.com/mikebelanger/cljs-blend4web/wiki/Starting-a-new-project)
