@@ -18,7 +18,7 @@ Controlling [Blend4Web](http://www.blend4web.org/)'s outputted WebGL with Clojur
 
 ### Developing
 
-###### 1: Downloading/Installing
+#### 1: Downloading/Installing
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 7/8 (8 recommended)
 * Latest version of [Clojure](http://www.clojure.org/)
 * The [boot](http://www.boot-clj.com/) project building tool.
@@ -28,7 +28,7 @@ If you'd like to develop the 3d content as well, download the [latest version of
 
 This next step varies from OS to OS
 
-###### 2: Building JAR (Linux/OS X Users)
+#### 2: Building JAR (Linux/OS X Users)
 
 First download this repo, and get into a terminal emulator (ie Terminal.app, iTerm) and enter:
 ```bash
@@ -41,11 +41,11 @@ Now compile this repo into a .jar, which sits in your ~/.m2 (maven repository). 
 boot package install
 ```
 
-###### 2: Building JAR (Windows Users)
+#### 2: Building JAR (Windows Users)
 Not sure :P  I'm sure there's a way, but I don't have access to a Windows machine atm.  If you could tell me how to build the above .jar on Windows, please let me know, I'll put it on here.
 
 
-###### 3: Next Steps
+#### 3: Next Steps
 
 So far just a basic tutorial, I promise I'll add more as this project starts to stabilize.
 
