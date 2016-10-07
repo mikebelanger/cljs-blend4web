@@ -50,3 +50,7 @@ Not sure :P  I'm sure there's a way, but I don't have access to a Windows machin
 So far just a basic tutorial, I promise I'll add more as this project starts to stabilize.
 
 [Starting a project from scratch](https://github.com/mikebelanger/cljs-blend4web/wiki/Starting-a-new-project)
+
+#### 4: Special Thanks
+
+I'd like to thank Matt Ratzke, Micha Niskin for helping me with Boot, and putting up with my silly questions. Another big thanks to Ivan Lyubovnikov, Yuri Kovelenov for putting up with my questions regarding Blend4Web.  Also thanks to anyone else who's worked on Blender, Clojure, and Clojurescript.
