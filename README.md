@@ -51,6 +51,6 @@ So far just a basic tutorial, I promise I'll add more as this project starts to 
 
 [Starting a project from scratch](https://github.com/mikebelanger/cljs-blend4web/wiki/Starting-a-new-project)
 
-#### 4: Special Thanks
+### Special Thanks
 
 I'd like to thank Matt Ratzke, Micha Niskin for helping me with Boot, and putting up with my silly questions. Another big thanks to Ivan Lyubovnikov, Yuri Kovelenov for putting up with my questions regarding Blend4Web.  Also thanks to anyone else who's worked on Blender, Clojure, and Clojurescript.
