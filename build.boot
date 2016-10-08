@@ -1,5 +1,5 @@
 (def +lib-version+ "16.09")
-(def +version+ (str +lib-version+ "-1"))
+(def +version+ (str +lib-version+ "-2"))
 
 (set-env!
   :resource-paths #{"resources"}
@@ -31,7 +31,7 @@
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/src/b4w.js"
               :checksum "e630f3cd36c4c0148cdfd11f16e05b08")
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/deploy/apps/website/b4w.min.js"
-              :checksum "aafb23224a6b71a223cbd63ca1c88bbe")
+              :checksum "E37949C81CE382FDC601749546AA7541")
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/tools/closure-compiler/extern_fullscreen.js"
               :checksum "fe0a688b40a2f0c672e779f0aaced2a8")
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/tools/closure-compiler/extern_modules.js"
