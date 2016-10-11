@@ -1,4 +1,4 @@
-# cljs-Blend4Web
+# cljs-blend4web
 
 [](dependency)
 ```clojure

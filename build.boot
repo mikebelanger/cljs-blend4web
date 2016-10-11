@@ -32,6 +32,10 @@
               :checksum "e630f3cd36c4c0148cdfd11f16e05b08")
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/deploy/apps/website/b4w.min.js"
               :checksum "E37949C81CE382FDC601749546AA7541")
+   (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/deploy/apps/common/b4w.whitespace.min.js"
+              :checksum "ca2a992e3ab0e89106a08845afb13070")
+   (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/deploy/apps/common/b4w.simple.min.js"
+              :checksum "36538a14ea487f4922cc8afadfdc5401")
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/tools/closure-compiler/extern_fullscreen.js"
               :checksum "fe0a688b40a2f0c672e779f0aaced2a8")
    (download  :url      "https://raw.githubusercontent.com/TriumphLLC/Blend4Web/master/tools/closure-compiler/extern_modules.js"
@@ -56,6 +60,10 @@
                          "cljsjs/blend4web/development/b4w.inc.js"
                          #"^b4w.min.js"
                          "cljsjs/blend4web/production/b4w.min.inc.js"
+                         #"^b4w.whitespace.min.js"
+                         "cljsjs/blend4web/development/b4w.whitespace.min.inc.js"
+                         #"^b4w.simple.min.js"
+                         "cljsjs/blend4web/development/b4w.simple.min.inc.js"
                          #"^extern_fullscreen.js"
                          "cljsjs/blend4web/common/extern_fullscreen.ext.js"
                          #"^extern_modules.js"
