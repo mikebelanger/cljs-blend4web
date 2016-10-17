@@ -16,7 +16,7 @@ Controlling [Blend4Web](http://www.blend4web.org/)'s outputted WebGL with Clojur
 
 *Note: Probably runs best on Chrome*
 
-### Developing
+### Installing
 
 #### 1: Downloading/Installing
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 7/8 (8 recommended)
