@@ -1,5 +1,0 @@
-(pom)
-pom
-(set-env! :resource-paths #{"src"})
-pwd
-(exit)
