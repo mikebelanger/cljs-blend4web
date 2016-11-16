@@ -12,7 +12,8 @@
 
 Controlling [Blend4Web](http://www.blend4web.org/)'s outputted WebGL with Clojurescript.  For an overview, check out the [proposed workflow](https://github.com/mikebelanger/blend4web/wiki/Clojurescript--Blend4Web).
 
-[Here it is in action](https://mikebelanger.github.io/blend4web_test/target/)
+[Here's an example of its output](https://mikebelanger.github.io/blend4web_test/target/)
+[Here's a workflow video](https://vimeo.com/191821775)
 
 *Note: Probably runs best on Chrome*
 
