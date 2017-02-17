@@ -1,5 +1,7 @@
 # cljs-blend4web
 
+# Note: This can now be installed via [cljsjs](http://cljsjs.github.io/).  Just search for 'blend4web' and follow the instructions.  What follows below is how to manually install it into Maven with Boot.
+
 [](dependency)
 ```clojure
 [cljsjs/blend4web "16.09-2"] ;; latest release
